@@ -167,10 +167,6 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
             <strong>{selected.stats?.heavyCollisions ?? '—'}</strong>
           </div>
           <div className="stat-card">
-            <span>Clean races</span>
-            <strong>{selected.stats?.cleanRaces ?? '—'}</strong>
-          </div>
-          <div className="stat-card">
             <span>Impact score</span>
             <strong>{selected.stats?.impactScore ? selected.stats.impactScore.toFixed(0) : '—'}</strong>
           </div>
@@ -295,7 +291,6 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
           </ResponsiveContainer>
         </div>
       </div>
-
     </div>
   );
 }
