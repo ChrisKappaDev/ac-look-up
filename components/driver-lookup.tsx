@@ -21,7 +21,7 @@ export default function DriverLookup({ data }: DriverLookupProps) {
 
   const allDrivers = useMemo<LookupDriver[]>(() => {
     return Object.entries(data.drivers)
-      .map(([name, stats]) => ({ ...stats, name }))
+      .map(([key, stats]) => ({ ...stats, name: stats.name ?? key }))
       .sort((a, b) => b.rating - a.rating);
   }, [data.drivers]);
 

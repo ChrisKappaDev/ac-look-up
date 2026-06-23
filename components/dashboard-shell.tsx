@@ -1,6 +1,4 @@
 'use client';
-
-import { useMemo, useState } from 'react';
 import type { DriverData } from '../lib/driver-utils';
 import DriverLookup from './driver-lookup';
 import DriverProfile from './driver-profile';
