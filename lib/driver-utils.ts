@@ -52,9 +52,9 @@ export type DriverProfile = DriverStats & {
 
 export function buildDriverProfiles(data: DriverData): DriverProfile[] {
   const list = Object.entries(data.drivers).map(([key, stats]) => ({
+    ...stats,
     guid: stats.guid ?? key,
     name: stats.name ?? key,
-    ...stats,
   }));
 
   const sorted = [...list].sort((a, b) => b.rating - a.rating);
