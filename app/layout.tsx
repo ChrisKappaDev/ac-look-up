@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AC Lookup | Sim Racing Ratings',
+  title: 'Full Force Sim Look Up | Sim Racing Ratings',
   description: 'Fast lookup for sim racing rating profiles with modern charts and analytics.',
 };
 
@@ -15,8 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="site-header">
             <div className="brand-row">
               <Link href="/" className="brand-link">
-                <span className="brand-mark">AC</span>
-                <span>AC Lookup</span>
+                <span className="brand-mark">FFS</span>
+                <span>Full Force Sim Look Up</span>
               </Link>
               <nav className="site-nav">
                 <Link href="/" className="nav-link">
