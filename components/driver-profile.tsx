@@ -82,6 +82,8 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
     [selected],
   );
 
+  const truncate = (s: string, n = 20) => (s && s.length > n ? `${s.slice(0, n - 1)}…` : s);
+
   return (
     <div className="profile-shell">
       <div className="profile-header profile-card">
@@ -179,7 +181,7 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
           <ResponsiveContainer width="100%" height={320}>
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={playerRadarData}>
               <PolarGrid stroke="rgba(255,255,255,0.12)" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: '#cbd6f0', fontSize: 12 }} />
+              <PolarAngleAxis dataKey="subject" tick={{ fill: '#cbd6f0', fontSize: 11 }} />
               <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} />
               <Radar name={selected.name} dataKey="value" stroke="#7b9cff" fill="#7b9cff" fillOpacity={0.35} />
               <Tooltip contentStyle={{ backgroundColor: '#0b1432', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 14 }} />
@@ -220,20 +222,28 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
                 data={tierData}
                 dataKey="value"
                 nameKey="name"
-                cx="50%"
+                cx="40%"
                 cy="48%"
                 innerRadius={60}
-                outerRadius={100}
+                outerRadius={90}
                 fill="#7b9cff"
                 paddingAngle={4}
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                labelLine={false}
+                label={({ name, percent, value }) => `${name} ${value} (${(percent * 100).toFixed(1)}%)`}
               >
                 {tierData.map((entry) => (
                   <Cell key={entry.name} fill={TIER_COLORS[entry.name] ?? '#7b9cff'} />
                 ))}
               </Pie>
               <Tooltip contentStyle={{ backgroundColor: '#0b1432', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 14 }} />
-              <Legend verticalAlign="bottom" height={36} iconType="circle" formatter={(value) => <span style={{ color: '#cbd6f0' }}>{value}</span>} />
+              <Legend
+                layout="vertical"
+                verticalAlign="middle"
+                align="right"
+                iconType="circle"
+                wrapperStyle={{ right: 0, top: 24, lineHeight: '22px' }}
+                formatter={(value) => <span style={{ color: '#cbd6f0' }}>{value}</span>}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -244,7 +254,7 @@ export default function DriverProfile({ data, selectedName }: DriverProfileProps
             <BarChart data={relativeRating.slice(0, 10)} layout="vertical" margin={{ top: 14, right: 16, left: 0, bottom: 10 }}>
               <CartesianGrid strokeDasharray="4 6" stroke="rgba(255,255,255,0.06)" />
               <XAxis type="number" tick={{ fill: '#cbd6f0', fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis type="category" dataKey="name" width={120} tick={{ fill: '#cbd6f0', fontSize: 12 }} axisLine={false} tickLine={false} />
+              <YAxis type="category" dataKey="name" width={180} tick={{ fill: '#cbd6f0', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(name) => truncate(name, 22)} />
               <Tooltip contentStyle={{ backgroundColor: '#0b1432', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 14 }} />
               <Bar dataKey="rating" radius={[12, 12, 12, 12]}>
                 {relativeRating.slice(0, 10).map((entry) => (

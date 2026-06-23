@@ -5,12 +5,14 @@ const remoteUrl = 'https://raw.githubusercontent.com/ChrisKappaDev/ac-rating-sys
 export async function fetchDriverData(): Promise<DriverData> {
   const response = await fetch(remoteUrl, { cache: 'no-store' });
   if (!response.ok) {
+    console.log('failed to fetch driver data. Please try again later.');
     throw new Error(`Failed to fetch driver data: ${response.status} ${response.statusText}`);
   }
 
   const raw = await response.text();
 
   try {
+    console.log('Driver data fetched successfully.');
     return JSON.parse(raw) as DriverData;
   } catch (error) {
     throw new Error(`Failed to parse driver data JSON: ${error instanceof Error ? error.message : String(error)}`);
